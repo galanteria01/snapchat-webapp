@@ -8,7 +8,7 @@ import './WebcamCapture.css'
 
 const videoConstraints = {
     height: 400,
-    width: 250,
+    width: 300,
     facingMode: "user"
 }
 
