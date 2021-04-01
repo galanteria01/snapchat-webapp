@@ -5,15 +5,17 @@ import SearchIcon from '@material-ui/icons/Search';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import {auth, database} from './Firebase';
 import Chat from './Chat.jsx';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './features/appSlice';
 import RadioButtonUncheckedRoundedIcon from '@material-ui/icons/RadioButtonUncheckedRounded';
 import { useHistory } from 'react-router-dom';
+import { resetCameraImage } from './features/cameraSlice';
 
 const Chats = () => {
 
     const [posts,setPosts] = useState([]);
     const user = useSelector(selectUser);
+    const dispatch = useDispatch();
     const history = useHistory();
     useEffect(() => {
         database.collection('posts').orderBy('timestamp','desc').onSnapshot(
@@ -25,7 +27,8 @@ const Chats = () => {
     },[])
 
     const takeSnap = () => {
-        history.push("/")
+        dispatch(resetCameraImage);
+        history.push("/");
     }
 
     return (
